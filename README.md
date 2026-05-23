@@ -1,37 +1,29 @@
-Intelligent Log Analyzer
+# Intelligent Log Analyzer Dashboard
 
-A lightweight, full-stack web application that automates 
-server log analysis using Python FastAPI and React.js.
+This React dashboard connects to the FastAPI backend at `http://localhost:8000/api/v1`.
 
-What it does
- Upload any .log file via REST API
- Automatically categorizes logs into ERROR, WARNING, INFO
- Calculates real-time system health score (%)
- Stores all results in SQLite database
- Displays interactive dashboard with bar charts
- Filter logs by severity level
+## Setup
 
-Tech Stack
- Backend: Python, FastAPI, SQLAlchemy, SQLite, Uvicorn  
- Frontend: React.js, Recharts, CSS3  
- API: REST, JSON, Swagger UI  
+1. Install Node.js and npm.
+2. From the `frontend` folder run:
+   ```bash
+   npm install
+   npm start
+   ```
 
-Quick Start
-Backend
- cd log-analyzer
- source venv/bin/activate
- uvicorn main:app --reload
+## Backend
 
-Frontend
- cd frontend
- npm install
- npm start
+Start the Python backend from the project root:
 
-Live
- Backend API  → http://127.0.0.1:8000/docs  
- Dashboard    → http://localhost:3000
+```bash
+python3 -m uvicorn main:app --reload
+```
 
-Why I built this
- Enterprise log tools like Splunk and ELK Stack are 
-expensive and complex. This project provides a free, 
-lightweight alternative deployable in under 2 minutes.
+Then open:
+
+- `http://localhost:8000/app/` for the dashboard served by FastAPI
+- `http://localhost:8000/docs` for FastAPI documentation
+
+## Notes
+
+This frontend is implemented as browser-native React ESM modules, so it does not require `npm` to run. If you have `npm` installed later, the existing `package.json` still supports a standard Create React App workflow.

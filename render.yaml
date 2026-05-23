@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: intelligent-log-analyzer
+    env: docker
+    dockerfilePath: Dockerfile
+    branch: main
+    plan: free
+    buildCommand: ""
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1"
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./intelligent_logs.db
+      - key: SECRET_KEY
+        value: change-me-in-production
+      - key: ALLOWED_ORIGINS
+        value: "https://your-app.onrender.com"

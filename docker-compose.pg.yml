@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: loguser
+      POSTGRES_PASSWORD: logpass
+      POSTGRES_DB: logdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  log-analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://loguser:logpass@postgres:5432/logdb
+      DEBUG: False
+      ENVIRONMENT: production
+      ALLOWED_ORIGINS: http://yourdomain.com
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
